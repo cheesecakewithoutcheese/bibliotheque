@@ -14,7 +14,7 @@ public class Book {
 
 	@Id @GeneratedValue public Long id;
 	public String author;
-	private Oeuvre oeuvres[];
+	private Work works[];
 	public String url;
 
 /***********************************************************************************************************/
@@ -41,12 +41,12 @@ private void setId(Long id) { this.id = id; }
 		this.author = author;
 	}
 
-	private Oeuvre[] getOeuvres() {
-		return oeuvres;
+	private Work[] getWorks() {
+		return works;
 	}
 
-	private void setWorks(Oeuvre[] oeuvres) {
-		this.oeuvres = oeuvres;
+	private void setWorks(Work[] works) {
+		this.works = works;
 	}
 
 /***********************************************************************************************************/

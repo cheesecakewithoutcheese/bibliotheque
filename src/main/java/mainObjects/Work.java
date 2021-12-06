@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Oeuvre {
+public class Work {
 
 /***********************************************************************************************************/
 	@Id @GeneratedValue
@@ -60,44 +60,44 @@ private void setAuthor(String author) {
 
 /***********************************************************************************************************/
 	
-	public Oeuvre() {
+	public Work() {
 	}
 
-	private Oeuvre(Long id) {
+	private Work(Long id) {
 		super();
 		this.id = id;
 	}
 
-	public Oeuvre(String title) {
+	public Work(String title) {
 		super();
 		this.title = title;
 	}
 
-	private Oeuvre(Long id, String title) {
+	private Work(Long id, String title) {
 		super();
 		this.id = id;
 		this.title = title;
 	}
 
-	private Oeuvre(String title, boolean status) {
+	private Work(String title, boolean status) {
 		super();
 		this.title = title;
 		this.status = status;
 	}
 
-	private Oeuvre(Long id, String title, boolean status) {
+	private Work(Long id, String title, boolean status) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.status = status;
 	}
-	public Oeuvre(String title, String type, boolean status) {
+	public Work(String title, String type, boolean status) {
 		super();
 		this.title = title;
 		this.type = type;
 		this.status = status;
 	}
-	public Oeuvre(String author, String title) {
+	public Work(String author, String title) {
 		super();
 		this.author = author;
 		this.title = title;

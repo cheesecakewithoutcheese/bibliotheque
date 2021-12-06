@@ -15,8 +15,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import mainObjects.Book;
-import mainObjects.BookCollectionTemp;
-import mainObjects.Oeuvre;
+import mainObjects.Work;
 
 @Configuration 
 @ComponentScan 
@@ -75,9 +74,9 @@ public class BeanConfig {
 	  CommandLineRunner initRepository(WorksRepository wrepo) {
 
 	    return args -> {
-	      log.info("Preloading " + wrepo.save(new Oeuvre("Liviu Rebreanu", "Ion")));
-	      log.info("Preloading " + wrepo.save(new Oeuvre("Ion Neculce", "O sama de cuvinte")));
-	      log.info("Preloading " + wrepo.save(new Oeuvre("Liviu Rebreanu", "Rascoala")));
+	      log.info("Preloading " + wrepo.save(new Work("Liviu Rebreanu", "Ion")));
+	      log.info("Preloading " + wrepo.save(new Work("Ion Neculce", "O sama de cuvinte")));
+	      log.info("Preloading " + wrepo.save(new Work("Liviu Rebreanu", "Rascoala")));
 	    };
 	  }
 	
@@ -87,23 +86,23 @@ public class BeanConfig {
 	public CommandLineRunner demoRepo(WorksRepository wrepo) {
 		return (args) -> {
 			// save a few customers
-			wrepo.save(new Oeuvre("Charles Baudelaire", "Florile raului"));
-			wrepo.save(new Oeuvre("Jonathan Swift", "Calatoriile lui Gulliver"));
-			wrepo.save(new Oeuvre("Charles Baudelaire", "fleures de mals"));
+			wrepo.save(new Work("Charles Baudelaire", "Florile raului"));
+			wrepo.save(new Work("Jonathan Swift", "Calatoriile lui Gulliver"));
+			wrepo.save(new Work("Charles Baudelaire", "fleures de mals"));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
-			for (Oeuvre oeuvre : wrepo.findAll()) {
-				log.info(oeuvre.toString());
+			for (Work work : wrepo.findAll()) {
+				log.info(work.toString());
 			}
 			log.info("");
 
 			// fetch an individual customer by ID
-			Oeuvre oeuvre = wrepo.findById(2L);
+			Work work = wrepo.findById(2L);
 			log.info("Customer found with findById(1L):");
 			log.info("--------------------------------");
-			try{log.info(oeuvre.toString());}
+			try{log.info(work.toString());}
 			catch(NullPointerException e) {log.info("nu s-a gasit");}
 			log.info("");
 
@@ -126,13 +125,8 @@ public class BeanConfig {
 	}
 	
 	@Bean
-	Oeuvre getOeuvre() {
-		return new Oeuvre();
-	}
-	
-	@Bean
-	BookCollectionTemp getBooks() {
-		return new BookCollectionTemp();
+	Work getWork() {
+		return new Work();
 	}
 	
 //	@Bean
