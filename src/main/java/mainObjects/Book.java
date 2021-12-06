@@ -15,13 +15,22 @@ public class Book {
 	@Id @GeneratedValue public Long id;
 	public String author;
 	private Oeuvre oeuvres[];
+	public String url;
 
 /***********************************************************************************************************/
 
 
   private Long getId() { return id; }
   
-  private void setId(Long id) { this.id = id; }
+  private String getUrl() {
+	return url;
+}
+
+private void setUrl(String url) {
+	this.url = url;
+}
+
+private void setId(Long id) { this.id = id; }
  
 
 	private String getAuthor() {
@@ -48,6 +57,7 @@ public class Book {
 	public Book(String author) {
 		super();
 		this.author = author;
+		this.url = generateUrl();
 	}
 
 	/*
@@ -61,4 +71,16 @@ public class Book {
 	public String toString() {
 		return this.author;
 	}
+	
+	public String generateUrl() {
+		String aux = new String();
+		aux = author.toLowerCase();
+		aux = aux.replaceAll(" ", "");
+		return aux;
+	}
+	
+	public void main(String args[]) {
+		
+	}
+	
 }

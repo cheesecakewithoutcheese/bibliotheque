@@ -1,23 +1,35 @@
 package mainObjects;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Entity
 public class Oeuvre {
 
 /***********************************************************************************************************/
-	
-	private Long id;
-	private String title, type;
-	private boolean status;
-	private int year;
+	@Id @GeneratedValue
+	public Long id;
+	public String title, type, author;
+	public boolean status;
+	public int year;
 	
 /***********************************************************************************************************/
 	
 	private Long getId() {
 		return id;
 	}
+	private String getAuthor() {
+	return author;
+}
+private void setAuthor(String author) {
+	this.author = author;
+}
 	private void setId(Long id) {
 		this.id = id;
 	}
@@ -56,7 +68,7 @@ public class Oeuvre {
 		this.id = id;
 	}
 
-	private Oeuvre(String title) {
+	public Oeuvre(String title) {
 		super();
 		this.title = title;
 	}
@@ -79,11 +91,16 @@ public class Oeuvre {
 		this.title = title;
 		this.status = status;
 	}
-	private Oeuvre(String title, String type, boolean status) {
+	public Oeuvre(String title, String type, boolean status) {
 		super();
 		this.title = title;
 		this.type = type;
 		this.status = status;
+	}
+	public Oeuvre(String author, String title) {
+		super();
+		this.author = author;
+		this.title = title;
 	}
 	
 /***********************************************************************************************************/
@@ -91,6 +108,6 @@ public class Oeuvre {
 		String r = new String();
 		if(this.status) r = "read";
 		else r = "not read";
-		return this.title + ", " + this.type + " (" + this.year + ") " + r;
+		return this.title + " by " + this.author + ", " + this.type + " (" + this.year + ") " + r;
 	}
 }

@@ -1,5 +1,7 @@
 package com.application.main;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -26,20 +28,20 @@ public class BeanConfig {
 	  CommandLineRunner initDatabase(BooksRepository repository) {
 
 	    return args -> {
-	      log.info("Preloading " + repository.save(new Book("New Author")));
-	      log.info("Preloading " + repository.save(new Book("Another Author")));
+	      log.info("Preloading " + repository.save(new Book("Liviu Rebreanu")));
+	      log.info("Preloading " + repository.save(new Book("Ion Neculce")));
 	    };
 	  }
+	
+	
 	
 	@Bean
 	public CommandLineRunner demo(BooksRepository repository) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new Book("Bauer"));
-			repository.save(new Book("Brian"));
-			repository.save(new Book("Bauer"));
-			repository.save(new Book("Palmer"));
-			repository.save(new Book("Dessler"));
+			repository.save(new Book("Charles Baudelaire"));
+			repository.save(new Book("Jonathan Swift"));
+			repository.save(new Book("Daniel Defoe"));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
@@ -59,8 +61,57 @@ public class BeanConfig {
 			// fetch customers by last name
 			log.info("Customer found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
-			repository.findByAuthor("Bauer").forEach(bauer -> {
-				log.info(bauer.toString());
+			repository.findByAuthor("Charles Baudelaire").forEach(charles -> {
+				log.info(charles.toString());
+			});
+			// for (Customer bauer : repository.findByLastName("Bauer")) {
+			// log.info(bauer.toString());
+			// }
+			log.info("");
+		};
+	}
+	
+	@Bean
+	  CommandLineRunner initRepository(WorksRepository wrepo) {
+
+	    return args -> {
+	      log.info("Preloading " + wrepo.save(new Oeuvre("Liviu Rebreanu", "Ion")));
+	      log.info("Preloading " + wrepo.save(new Oeuvre("Ion Neculce", "O sama de cuvinte")));
+	      log.info("Preloading " + wrepo.save(new Oeuvre("Liviu Rebreanu", "Rascoala")));
+	    };
+	  }
+	
+	
+	
+	@Bean
+	public CommandLineRunner demoRepo(WorksRepository wrepo) {
+		return (args) -> {
+			// save a few customers
+			wrepo.save(new Oeuvre("Charles Baudelaire", "Florile raului"));
+			wrepo.save(new Oeuvre("Jonathan Swift", "Calatoriile lui Gulliver"));
+			wrepo.save(new Oeuvre("Charles Baudelaire", "fleures de mals"));
+
+			// fetch all customers
+			log.info("Customers found with findAll():");
+			log.info("-------------------------------");
+			for (Oeuvre oeuvre : wrepo.findAll()) {
+				log.info(oeuvre.toString());
+			}
+			log.info("");
+
+			// fetch an individual customer by ID
+			Oeuvre oeuvre = wrepo.findById(2L);
+			log.info("Customer found with findById(1L):");
+			log.info("--------------------------------");
+			try{log.info(oeuvre.toString());}
+			catch(NullPointerException e) {log.info("nu s-a gasit");}
+			log.info("");
+
+			// fetch customers by last name
+			log.info("Customer found with findByTitle('ion'):");
+			log.info("--------------------------------------------");
+			wrepo.findByTitle("Ion").forEach(ion -> {
+				log.info(ion.toString());
 			});
 			// for (Customer bauer : repository.findByLastName("Bauer")) {
 			// log.info(bauer.toString());

@@ -3,19 +3,21 @@ package com.application.main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import mainObjects.Book;
 
 @Controller 
 public class mainController {
 	
 	@Autowired 
 	private final BooksRepository repository;
+	private final WorksRepository wrepo;
 	
-	mainController(BooksRepository repository){
+	mainController(BooksRepository repository, WorksRepository wrepo){
 		this.repository = repository;
+		this.wrepo = wrepo;
 	}
 	
 	@RequestMapping("/library")
@@ -25,4 +27,10 @@ public class mainController {
 		return "YourLibrary";
 	}
 	
+	@RequestMapping("/{author}")
+	public String book(@PathVariable String author, Model model) {
+		model.addAttribute("author", repository.findByAuthor(author));
+		model.addAttribute("oeuvres", wrepo.findByAuthor(author));
+		return "YourBook";
+	}
 }

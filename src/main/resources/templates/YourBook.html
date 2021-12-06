@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title th:text = "${author}">  </title>
+</head>
+<body>
+	<h1 align = "center" th:text="${author}">Pagina pentru un anumit autor</h1>
+	<p> Works: </p>
+	<table>
+		<tr>
+			<th> title </th>
+			<th> type </th>
+			<th> year </th>
+			<th> status </th>
+		</tr>
+		<tr th:each = "oeuvre: ${oeuvres}">
+			<td th:text = "${oeuvre.title}"></td>
+			<td th:text = "${oeuvre.type}"></td>
+			<td th:text = "${oeuvre.year}"></td>
+			<td th:text = "${oeuvre.status}"></td>
+		</tr>
+	</table>
+</body>
+</html>
