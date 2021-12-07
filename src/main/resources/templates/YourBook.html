@@ -14,11 +14,11 @@
 			<th> year </th>
 			<th> status </th>
 		</tr>
-		<tr th:each = "oeuvre: ${oeuvres}">
-			<td th:text = "${oeuvre.title}"></td>
-			<td th:text = "${oeuvre.type}"></td>
-			<td th:text = "${oeuvre.year}"></td>
-			<td th:text = "${oeuvre.status}"></td>
+		<tr th:each = "work: ${works}">
+			<td th:text = "${work.title}"></td>
+			<td th:text = "${work.type}"></td>
+			<td th:text = "${work.year}"></td>
+			<td th:text = "${work.status}"></td>
 		</tr>
 	</table>
 </body>

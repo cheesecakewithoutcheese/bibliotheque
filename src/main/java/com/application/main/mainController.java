@@ -30,7 +30,7 @@ public class mainController {
 	@RequestMapping("/{author}")
 	public String book(@PathVariable String author, Model model) {
 		model.addAttribute("author", repository.findByAuthor(author));
-		model.addAttribute("oeuvres", wrepo.findByAuthor(author));
+		model.addAttribute("works", wrepo.findByAuthor(author));
 		return "YourBook";
 	}
 }
