@@ -13,11 +13,11 @@ import mainObjects.Book;
 
 @SpringBootApplication
 @EntityScan("mainObjects")
-public class PersonalLibraryApplication {
+public class mainApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(PersonalLibraryApplication.class, args);
+		SpringApplication.run(mainApplication.class, args);
 	}
 
 }

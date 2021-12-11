@@ -21,7 +21,7 @@ import mainObjects.Work;
 @ComponentScan 
 public class BeanConfig {
 	
-	private static final Logger log = LoggerFactory.getLogger(PersonalLibraryApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(mainApplication.class);
 
 	@Bean
 	  CommandLineRunner initDatabase(BooksRepository repository) {
