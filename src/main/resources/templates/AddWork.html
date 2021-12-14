@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>add a work</title>
+</head>
+<body>
+	<form action="#" th:action="@{/addwork}" th:object="${work}"
+		method="post">
+		<label for="name">Author's Name</label>
+		<input type="text" th:field="*{author}" id="name" placeholder="Author's Name">
+		 
+		<label for="title">Title</label> 
+		<input type="text" th:field="*{title}"
+			id="title" placeholder="Title"> 
+			
+		<select th:field="*{type}">
+			<option th:each="type : ${allTypes}" th:value="${type}"
+				th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>
+		</select>
+		
+		<label for="year">Year</label> 
+		<input type="number" th:field="*{year}"
+			id="year" placeholder="Year"> 
+			
+		<!--<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>-->
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>

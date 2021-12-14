@@ -23,24 +23,23 @@ public class BeanConfig {
 	
 	private static final Logger log = LoggerFactory.getLogger(mainApplication.class);
 
-	@Bean
-	  CommandLineRunner initDatabase(BooksRepository repository) {
-
-	    return args -> {
-	      log.info("Preloading " + repository.save(new Book("Liviu Rebreanu")));
-	      log.info("Preloading " + repository.save(new Book("Ion Neculce")));
-	    };
-	  }
-	
+	/*
+	 * @Bean CommandLineRunner initDatabase(BooksRepository repository) {
+	 * 
+	 * return args -> { log.info("Preloading " + repository.save(new
+	 * Book("Liviu Rebreanu"))); log.info("Preloading " + repository.save(new
+	 * Book("Ion Neculce"))); }; }
+	 */
 	
 	
 	@Bean
 	public CommandLineRunner demo(BooksRepository repository) {
 		return (args) -> {
-			// save a few customers
-			repository.save(new Book("Charles Baudelaire"));
-			repository.save(new Book("Jonathan Swift"));
-			repository.save(new Book("Daniel Defoe"));
+			/*
+			 * // save a few customers repository.save(new Book("Charles Baudelaire"));
+			 * repository.save(new Book("Jonathan Swift")); repository.save(new
+			 * Book("Daniel Defoe"));
+			 */
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
@@ -70,26 +69,25 @@ public class BeanConfig {
 		};
 	}
 	
-	@Bean
-	  CommandLineRunner initRepository(WorksRepository wrepo) {
-
-	    return args -> {
-	      log.info("Preloading " + wrepo.save(new Work("Liviu Rebreanu", "Ion")));
-	      log.info("Preloading " + wrepo.save(new Work("Ion Neculce", "O sama de cuvinte")));
-	      log.info("Preloading " + wrepo.save(new Work("Liviu Rebreanu", "Rascoala")));
-	    };
-	  }
-	
+	/*
+	 * @Bean CommandLineRunner initRepository(WorksRepository wrepo) {
+	 * 
+	 * return args -> { log.info("Preloading " + wrepo.save(new
+	 * Work("Liviu Rebreanu", "Ion"))); log.info("Preloading " + wrepo.save(new
+	 * Work("Ion Neculce", "O sama de cuvinte"))); log.info("Preloading " +
+	 * wrepo.save(new Work("Liviu Rebreanu", "Rascoala"))); }; }
+	 */
 	
 	
 	@Bean
 	public CommandLineRunner demoRepo(WorksRepository wrepo) {
 		return (args) -> {
-			// save a few customers
-			wrepo.save(new Work("Charles Baudelaire", "Florile raului"));
-			wrepo.save(new Work("Jonathan Swift", "Calatoriile lui Gulliver"));
-			wrepo.save(new Work("Charles Baudelaire", "fleures de mals"));
-
+			/*
+			 * // save a few customers wrepo.save(new Work("Charles Baudelaire",
+			 * "Florile raului")); wrepo.save(new Work("Jonathan Swift",
+			 * "Calatoriile lui Gulliver")); wrepo.save(new Work("Charles Baudelaire",
+			 * "fleures de mals"));
+			 */
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");

@@ -24,37 +24,37 @@ public class Work {
 	private Long getId() {
 		return id;
 	}
-	private String getAuthor() {
+	public String getAuthor() {
 	return author;
 }
-private void setAuthor(String author) {
+public void setAuthor(String author) {
 	this.author = author;
 }
 	private void setId(Long id) {
 		this.id = id;
 	}
-	private String getTitle() {
+	public String getTitle() {
 		return title;
 	}
-	private void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	private String getType() {
+	public String getType() {
 		return type;
 	}
-	private void setType(String type) {
+	public void setType(String type) {
 		this.type = type;
 	}
-	private boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
-	private void setStatus(boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	private int getYear() {
+	public int getYear() {
 		return year;
 	}
-	private void setYear(int year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 

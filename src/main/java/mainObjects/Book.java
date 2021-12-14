@@ -30,14 +30,14 @@ private void setUrl(String url) {
 	this.url = url;
 }
 
-private void setId(Long id) { this.id = id; }
+public void setId(Long id) { this.id = id; }
  
 
-	private String getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	private void setAuthor(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
@@ -81,6 +81,11 @@ private void setId(Long id) { this.id = id; }
 	
 	public void main(String args[]) {
 		
+	}
+
+	public Book orElseThrow(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

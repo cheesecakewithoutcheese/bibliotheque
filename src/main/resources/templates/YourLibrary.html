@@ -3,13 +3,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>your library</title>
-	 <link rel="stylesheet" type="text/css" th:href="@{/static/css/myStyle.css}" />
+<meta charset="UTF-8">
+<title>your library</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/myStyle.css}" />
 </head>
 
 <body>
-	<h1>  your personal library </h1>
+	<h1>your personal library</h1>
 	<div class="row">
 		<div class="column">
 			<p>
@@ -23,25 +24,16 @@
 					<th>author</th>
 					<th>url</th>
 				</tr>
-				<tr th:if="${books.empty}">
-					<td colspan="2">No Books Available</td>
-				</tr>
 				<tr th:each="book : ${books}">
 					<td><span th:text="${book.id}"> id </span></td>
-					<td><a th:href="@{${book.author}}"> <span
+					<td><a th:href="@{/library/{author}(author=${book.author})}"> <span
 							th:text="${book.author}"> autor </span>
 					</a></td>
 
 				</tr>
 			</table>
 		</div>
-
-		<div class="column">
-			<form>
-				<label for="fauthor">Author's Name</label><br> <input
-					type="text" id="fauthor" name="fauthor"><br>
-			</form>
-		</div>
+		<a th:href="@{/addbook}">Add new author</a>
 	</div>
 </body>
 
