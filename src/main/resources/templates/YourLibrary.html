@@ -22,11 +22,10 @@
 				<tr>
 					<th>id</th>
 					<th>author</th>
-					<th>url</th>
 				</tr>
 				<tr th:each="book : ${books}">
 					<td><span th:text="${book.id}"> id </span></td>
-					<td><a th:href="@{/library/{author}(author=${book.author})}"> <span
+					<td><a th:href="@{/library/${book.author}}"> <span
 							th:text="${book.author}"> autor </span>
 					</a></td>
 

@@ -21,6 +21,6 @@
 			<td th:text = "${work.status}"></td>
 		</tr>
 	</table>
-	<p> Add a new work for this author <a href = "/addwork">here</a>
+	<p> Add a new work for this author <a th:href = "@{/addwork(author=${author})}">here</a>
 </body>
 </html>

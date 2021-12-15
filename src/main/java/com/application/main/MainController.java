@@ -75,19 +75,20 @@ public class MainController {
 	}
 
 	@GetMapping("/addwork")
-	public String addWorkForm(Model model) {
+	public String addWorkForm(Model model, @RequestParam(name="author", required=false, defaultValue="Insert Author's Name") String author) {
 		model.addAttribute("work", new Work());
+		model.addAttribute("inheritAuthor", author);
 		String[] allTypes = {"novel", "novella", "short story", "essay", "poem", "other"};
 		model.addAttribute("allTypes", allTypes);
 		return "AddWork";
 	}
 
 	@PostMapping("/addwork")
-		public String saveWorkSubmission(@ModelAttribute Work work) {
+		public String saveWorkSubmission(@ModelAttribute Work work, Model model) {
 
 		wrepo.save(work);
-		repository.save(new Book(work.author));
-		
-		return "Result";
+		if(repository.findByAuthor(work.author)==null) repository.save(new Book(work.author));
+		model.addAttribute("work", work);
+		return "ResultWork";
 	}
 }

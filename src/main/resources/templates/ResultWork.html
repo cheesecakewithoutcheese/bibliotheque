@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New work added</title>
+</head>
+<body>
+	<p> added <span th:text = "${work.title}" ></span>
+			to <span th:text="{work.author}"> author</span>'s collection </p> 
+	<p> return to <a th:href="@{/library}" > library </a>
+	<p> return to <a th:href="@{/library/{author}(author=${work.author}})" >
+			<span th:text="${work.author}">author</span></a>
+</body>
+</html>
