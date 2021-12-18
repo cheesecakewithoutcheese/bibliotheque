@@ -1,5 +1,7 @@
 package com.application.main;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,36 +30,34 @@ public class MainController {
 		this.wrepo = wrepo;
 	}
 
+	@RequestMapping("/")
+	public String index(Model model){
+		model.addAttribute("books", repository.findAll());
+		return "index";
+	}
+	
 	@RequestMapping("/library")
-	public String library(@RequestParam(name = "user", required = false, defaultValue = "new user") String user,
-			Model model) {
+	public String library(@RequestParam(name = "user", required = false, 
+			defaultValue = "new user") String user, Model model) {
 		model.addAttribute("user", user);
 		model.addAttribute("books", repository.findAll());
 		return "YourLibrary";
 	}
 
-	@RequestMapping("/library/{author}")
-	public String book(@PathVariable String author, Model model) {
-		model.addAttribute("author", repository.findByAuthor(author));
-		model.addAttribute("works", wrepo.findByAuthor(author));
+	@RequestMapping("/library/{url}")
+	public String book(@PathVariable("url") String url, Model model) {
+		model.addAttribute("author", repository.findByUrl(url).toString());
+		Book book = repository.findByUrl(url);
+		model.addAttribute("works", wrepo.findByBookId(book.id));
+		model.addAttribute("url", url);
 		return "YourBook";
 	}
-
-	@PostMapping("/update/{id}")
-	public String updateAuthor(@PathVariable("id") long id, @Valid Book author, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			author.setId(id);
-			return "update-user";
-		}
-		repository.save(author);
-		return "redirect:/index";
-	}
-
-	@GetMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
-		Book author = repository.findById(id);
-		repository.delete(author);
-		return "redirect:/index";
+	
+	@GetMapping("/library/{id}/delete")
+	public String deleteAuthor(@PathVariable("id") long id, Model model) {
+		Book book = repository.findById(id);
+		repository.delete(book);
+		return "redirect:/library";
 	}
 
 	@GetMapping("/addbook")
@@ -67,28 +67,47 @@ public class MainController {
 	}
 
 	@PostMapping("/addbook")
-	public String saveAuthorSubmission(@ModelAttribute Book book) {
-
-		repository.save(book);
-
-		return "Result";
+	public String saveAuthorSubmission(@ModelAttribute Book book, Model model) {
+		book.url = book.generateUrl();
+		if(repository.findByUrl(book.url)==null) 
+			{
+				repository.save(book);
+				return "Result";
+			}
+		else {
+			model.addAttribute("url", book.url);
+			return "NegativeResult";
+		}
 	}
-
-	@GetMapping("/addwork")
-	public String addWorkForm(Model model, @RequestParam(name="author", required=false, defaultValue="Insert Author's Name") String author) {
-		model.addAttribute("work", new Work());
-		model.addAttribute("inheritAuthor", author);
+	
+	@GetMapping("/library/{url}/addwork")
+	public String addWorkForm(Model model, @PathVariable String url) {
+		Book book = repository.findByUrl(url);
+		model.addAttribute("work", new Work(book.id));
+		model.addAttribute("inheritAuthor", book.toString());
 		String[] allTypes = {"novel", "novella", "short story", "essay", "poem", "other"};
 		model.addAttribute("allTypes", allTypes);
 		return "AddWork";
 	}
 
-	@PostMapping("/addwork")
+	@PostMapping("/library/{url}/addwork")
 		public String saveWorkSubmission(@ModelAttribute Work work, Model model) {
-
-		wrepo.save(work);
-		if(repository.findByAuthor(work.author)==null) repository.save(new Book(work.author));
-		model.addAttribute("work", work);
-		return "ResultWork";
+		if(wrepo.findByTitle(work.title)==null) {
+			wrepo.save(work);
+			if(repository.findByAuthor(work.author)==null) repository.save(new Book(work.author));
+			model.addAttribute("work", work);
+			return "ResultWork";
+		}
+		else {
+			model.addAttribute("book", repository.findById(work.bookId));
+			return "NegativeResult";
+		}
 	}
+	
+	@GetMapping("/delete/{title}")
+	public String deleteUser(@PathVariable("title") String title, Model model) {
+		List<Work> work = wrepo.findByTitle(title);
+		wrepo.deleteAll(work);
+		return "redirect:/library";
+	}	
 }

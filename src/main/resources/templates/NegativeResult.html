@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>error:already exists</title>
+</head>
+<body>
+<p> the author or work you tried to introduce is already in the database, see <a th:href = "@{/library/{url}(url=${book.url})}" > here </a>
+</body>
+</html>

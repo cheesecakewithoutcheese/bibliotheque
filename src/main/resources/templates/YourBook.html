@@ -13,14 +13,16 @@
 			<th> type </th>
 			<th> year </th>
 			<th> status </th>
+			<th> delete </th>
 		</tr>
 		<tr th:each = "work: ${works}">
 			<td th:text = "${work.title}"></td>
 			<td th:text = "${work.type}"></td>
 			<td th:text = "${work.year}"></td>
 			<td th:text = "${work.status}"></td>
+			<td> <a th:href = "@{/delete/{title}(title=${work.title})}" > Delete </a></td>
 		</tr>
 	</table>
-	<p> Add a new work for this author <a th:href = "@{/addwork(author=${author})}">here</a>
+	<p> Add a new work for this author <a th:href = "@{/library/{url}/addwork(url=${url})}">here</a>
 </body>
 </html>

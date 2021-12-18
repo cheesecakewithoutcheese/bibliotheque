@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>add book</title>
 </head>
 <body>
 	<form action = "#" th:action="@{/addbook}" th:object="${book}" method="post">
     	<label for="name">Author's Name</label>
     	<input type="text" th:field="*{author}" id="name" placeholder="Author's Name">
-    	<!--<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>-->
+    	<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
     	<input type="submit" value="Submit">   
 	</form>
 </body>

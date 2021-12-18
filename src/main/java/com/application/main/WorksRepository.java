@@ -16,4 +16,5 @@ public interface WorksRepository extends CrudRepository<Work, Long>{
 	List <Work> findByStatus(boolean status);
 	List <Work> findByType(String type);
 	List <Work> findByAuthor(String author);
+	List <Work> findByBookId(Long bookId);
 }

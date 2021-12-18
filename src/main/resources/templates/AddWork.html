@@ -5,25 +5,21 @@
 <title>add a work</title>
 </head>
 <body>
-	<form action="#" th:action="@{/addwork}" th:object="${work}"
+	<form action="#" th:action="@{/library/{url}/addwork}" th:object="${work}"
 		method="post">
 		<label for="name">Author's Name</label>
-		<input type="text" th:field="*{author}" id="name" placeholder="${inheritAuthor}">
-		 
+			<input type="text" th:field="*{author}" id="name" th:placeholder="${inheritAuthor}"> 
 		<label for="title">Title</label> 
-		<input type="text" th:field="*{title}"
-			id="title" placeholder="Title"> 
-			
+			<input type="text" th:field="*{title}"
+				id="title" placeholder="Title"> 
 		<select th:field="*{type}">
 			<option th:each="type : ${allTypes}" th:value="${type}"
 				th:text="${type}"> Type </option>
 		</select>
 		
 		<label for="year">Year</label> 
-		<input type="number" th:field="*{year}"
-			id="year" placeholder="Year"> 
-			
-		<!--<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>-->
+			<input type="number" th:field="*{year}"
+				id="year" placeholder="Year">
 		<input type="submit" value="Submit">
 	</form>
 </body>

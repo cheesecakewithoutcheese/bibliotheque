@@ -6,9 +6,9 @@
 </head>
 <body>
 	<p> added <span th:text = "${work.title}" ></span>
-			to <span th:text="{work.author}"> author</span>'s collection </p> 
+			to <span th:text="${work.author}"> author</span>'s collection </p> 
 	<p> return to <a th:href="@{/library}" > library </a>
-	<p> return to <a th:href="@{/library/{author}(author=${work.author}})" >
+	<p> return to <a th:href="@{/library/{url}(url=${work.url}})" >
 			<span th:text="${work.author}">author</span></a>
 </body>
 </html>
