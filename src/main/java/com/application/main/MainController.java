@@ -67,16 +67,18 @@ public class MainController {
 	}
 
 	@PostMapping("/addbook")
-	public String saveAuthorSubmission(@ModelAttribute Book book, Model model) {
-		book.url = book.generateUrl();
-		if(repository.findByUrl(book.url)==null) 
-			{
-				repository.save(book);
-				return "Result";
-			}
-		else {
-			model.addAttribute("url", book.url);
+	public String saveAuthorSubmission(@ModelAttribute @Valid Book book, Model model, BindingResult bindingResult) {
+		/*
+		 * if(repository.findByAuthor(book.author)==null) { repository.save(book);
+		 * return "Result"; } else { model.addAttribute("url", book.url); return
+		 * "NegativeResult"; }
+		 */
+		if(bindingResult.hasErrors()) {
 			return "NegativeResult";
+		}
+		else {
+		repository.save(book);
+		return "Result";
 		}
 	}
 	
