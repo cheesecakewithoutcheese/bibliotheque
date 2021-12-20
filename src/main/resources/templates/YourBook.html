@@ -20,9 +20,9 @@
 			<td th:text = "${work.type}"></td>
 			<td th:text = "${work.year}"></td>
 			<td th:text = "${work.status}"></td>
-			<td> <a th:href = "@{/delete/{title}(title=${work.title})}" > Delete </a></td>
+			<td> <a th:href = "@{/delete/{id}(id=${work.id})}" > Delete </a></td>
 		</tr>
 	</table>
-	<p> Add a new work for this author <a th:href = "@{/library/{url}/addwork(url=${url})}">here</a>
+	<p> Add a new work for this author <a th:href = "@{/library/{id}/addwork(id=${id})}">here</a>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.application.main;
 
-import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -44,12 +44,11 @@ public class MainController {
 		return "YourLibrary";
 	}
 
-	@RequestMapping("/library/{url}")
-	public String book(@PathVariable("url") String url, Model model) {
-		model.addAttribute("author", repository.findByUrl(url).toString());
-		Book book = repository.findByUrl(url);
-		model.addAttribute("works", wrepo.findByBookId(book.id));
-		model.addAttribute("url", url);
+	@RequestMapping("/library/{id}")
+	public String book(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("author", repository.findById(id));
+		model.addAttribute("works", wrepo.findByBookId(id));
+		model.addAttribute("id", id);
 		return "YourBook";
 	}
 	
@@ -67,14 +66,10 @@ public class MainController {
 	}
 
 	@PostMapping("/addbook")
-	public String saveAuthorSubmission(@ModelAttribute @Valid Book book, Model model, BindingResult bindingResult) {
-		/*
-		 * if(repository.findByAuthor(book.author)==null) { repository.save(book);
-		 * return "Result"; } else { model.addAttribute("url", book.url); return
-		 * "NegativeResult"; }
-		 */
+	public String saveAuthorSubmission(@ModelAttribute @Valid Book book, Model model, 
+															BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("url", book.url);
+			model.addAttribute("id", book.id);
 			return "NegativeResult";
 		}
 		else {
@@ -83,17 +78,17 @@ public class MainController {
 		}
 	}
 	
-	@GetMapping("/library/{url}/addwork")
-	public String addWorkForm(Model model, @PathVariable String url) {
-		Book book = repository.findByUrl(url);
-		model.addAttribute("work", new Work(book.id));
+	@GetMapping("/library/{id}/addwork")
+	public String addWorkForm(Model model, @PathVariable Long id) {
+		Optional<Book> book = repository.findById(id);
+		model.addAttribute("work", new Work(id));
 		model.addAttribute("inheritAuthor", book.toString());
 		String[] allTypes = {"novel", "novella", "short story", "essay", "poem", "other"};
 		model.addAttribute("allTypes", allTypes);
 		return "AddWork";
 	}
 
-	@PostMapping("/library/{url}/addwork")
+	@PostMapping("/library/{id}/addwork")
 		public String saveWorkSubmission(@ModelAttribute Work work, Model model) {
 		if(wrepo.findByTitle(work.title)==null) {
 			wrepo.save(work);
@@ -102,15 +97,14 @@ public class MainController {
 			return "ResultWork";
 		}
 		else {
-			model.addAttribute("book", repository.findById(work.bookId));
+			model.addAttribute("id", repository.findById(work.bookId));
 			return "NegativeResult";
 		}
 	}
 	
-	@GetMapping("/delete/{title}")
-	public String deleteUser(@PathVariable("title") String title, Model model) {
-		List<Work> work = wrepo.findByTitle(title);
-		wrepo.deleteAll(work);
+	@GetMapping("/delete/{id}")
+	public String deleteWork(@PathVariable("id") Long id, Model model) {
+		wrepo.deleteById(id);
 		return "redirect:/library";
 	}	
 }

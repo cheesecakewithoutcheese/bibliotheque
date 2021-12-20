@@ -5,7 +5,7 @@
 <title>add a work</title>
 </head>
 <body>
-	<form action="#" th:action="@{/library/{url}/addwork}" th:object="${work}"
+	<form action="#" th:action="@{/library/{id}/addwork}" th:object="${work}"
 		method="post">
 		<label for="name">Author's Name</label>
 			<input type="text" th:field="*{author}" id="name" th:placeholder="${inheritAuthor}"> 
