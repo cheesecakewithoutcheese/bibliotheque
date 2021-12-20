@@ -74,6 +74,7 @@ public class MainController {
 		 * "NegativeResult"; }
 		 */
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("url", book.url);
 			return "NegativeResult";
 		}
 		else {

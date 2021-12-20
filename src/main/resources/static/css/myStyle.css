@@ -1,3 +1,8 @@
 body {
-  background-color: green;
+  background-color: #CDB059;
+}
+h1 {
+	color: #2E1901;
+	font: italic small-caps bold 36px/40px Georgia, serif;
+	text-align: center;
 }

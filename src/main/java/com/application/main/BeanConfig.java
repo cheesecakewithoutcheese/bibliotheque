@@ -32,6 +32,11 @@ public class BeanConfig {
 	 * Book("Liviu Rebreanu"))); log.info("Preloading " + repository.save(new
 	 * Book("Ion Neculce"))); }; }
 	 */
+	
+	/*
+	 * @Bean int initDatabase(BooksRepository repo) { repo.save(new
+	 * Book("Ion Barbu")); return 0; }
+	 */
 
 	/*
 	 * @Bean public CommandLineRunner demo(BooksRepository repository) { return
