@@ -89,7 +89,7 @@ public class MainController {
 	}
 
 	@PostMapping("/library/{id}/addwork")
-		public String saveWorkSubmission(@ModelAttribute Work work, Model model) {
+		public String saveWorkSubmission(@ModelAttribute Work work, @PathVariable Long id, Model model) {
 		if(wrepo.findByTitle(work.title)==null) {
 			wrepo.save(work);
 			if(repository.findByAuthor(work.author)==null) repository.save(new Book(work.author));

@@ -21,7 +21,7 @@ public class Work {
 
 /*********************************************************************/
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -29,7 +29,7 @@ public class Work {
 		this.id = id;
 	}
 
-	private Long getBookId() {
+	public Long getBookId() {
 		return bookId;
 	}
 
@@ -37,7 +37,7 @@ public class Work {
 		this.bookId = bookId;
 	}
 
-	private String getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
@@ -45,7 +45,7 @@ public class Work {
 		this.title = title;
 	}
 
-	private String getType() {
+	public String getType() {
 		return type;
 	}
 
@@ -53,7 +53,7 @@ public class Work {
 		this.type = type;
 	}
 
-	private String getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
@@ -61,7 +61,7 @@ public class Work {
 		this.author = author;
 	}
 
-	private boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
@@ -69,7 +69,7 @@ public class Work {
 		this.status = status;
 	}
 
-	private int getYear() {
+	public int getYear() {
 		return year;
 	}
 

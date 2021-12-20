@@ -11,7 +11,7 @@ import mainObjects.Work;
 @Component
 public interface WorksRepository extends CrudRepository<Work, Long>{
 	
-	Work findById(long id);
+	Work findById(long id); // long sau Long?
 	List <Work> findByTitle(String title);
 	List <Work> findByStatus(boolean status);
 	List <Work> findByType(String type);
